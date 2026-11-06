@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Peta Belajar Modeler: System Dynamics, SimPy, ABM</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#edf1f4;--card:#fff;--ink:#16202b;--mut:#566474;--line:#b4c1cd;--py:#2f6db5;--sd:#1e8a78;--base:#7a5bb5;--simpy:#b36d0c;--gt:#b0457a;--abm:#c2492f;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10171e;--card:#1a232d;--ink:#e6edf3;--mut:#9aa8b6;--line:#34424f;--py:#6aa5ee;--sd:#4cc5ae;--base:#b69cf0;--simpy:#e8a03d;--gt:#e47bb0;--abm:#f2876c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#10171e;--card:#1a232d;--ink:#e6edf3;--mut:#9aa8b6;--line:#34424f;--py:#6aa5ee;--sd:#4cc5ae;--base:#b69cf0;--simpy:#e8a03d;--gt:#e47bb0;--abm:#f2876c;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,system-ui,sans-serif}
+.w{max-width:820px;margin:0 auto;padding:28px 18px 60px}
+h1{font:800 clamp(28px,6vw,44px)/1.08 "Bricolage Grotesque",Figtree,sans-serif;margin:0 0 8px;letter-spacing:-.02em}
+.sub{color:var(--mut);margin:0 0 20px;max-width:60ch}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line)}
+.pg{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--mut)}
+.pt{flex:1;height:8px;background:var(--line);border-radius:4px;overflow:hidden}.pt i{display:block;height:100%;width:0;background:var(--sd);transition:width .3s}
+.fs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+button{font:500 13px Figtree,sans-serif;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 12px;cursor:pointer}
+button[aria-pressed=true]{background:var(--c,var(--ink));border-color:var(--c,var(--ink));color:var(--bg)}
+button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible{outline:2px solid var(--py);outline-offset:2px}
+.ph{list-style:none;margin:24px 0 0;padding:0}
+details.p{position:relative;margin:0 0 14px 22px;border-left:3px solid var(--line);padding-left:20px}
+details.p>summary{list-style:none;cursor:pointer;padding:2px 0 6px}details.p>summary::-webkit-details-marker{display:none}
+.n{position:absolute;left:-17px;top:0;width:31px;height:31px;border-radius:50%;background:var(--ink);color:var(--bg);font:800 15px/31px "Bricolage Grotesque",sans-serif;text-align:center}
+.pt2{font:800 21px/1.25 "Bricolage Grotesque",sans-serif;margin:0}
+.meta{font-size:14px;color:var(--mut);margin:2px 0 0}
+.proj{font-size:14px;margin:6px 0 10px;padding:8px 12px;background:var(--card);border-left:4px solid var(--line);border-radius:0 8px 8px 0}
+ul.t{list-style:none;margin:0;padding:0}
+li.tp{position:relative;margin:0 0 10px 18px;padding:10px 14px;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--c);border-radius:8px}
+li.tp::before{content:"";position:absolute;left:-19px;top:22px;width:15px;border-top:2px solid var(--line)}
+li.tp label{display:flex;gap:9px;align-items:flex-start;font-weight:600;cursor:pointer}
+li.tp input{margin-top:5px;accent-color:var(--c);width:16px;height:16px}
+li.done .tt{text-decoration:line-through;color:var(--mut)}
+li.tp p{margin:2px 0 8px 25px;font-size:14.5px;color:var(--mut)}
+.ls{display:flex;flex-wrap:wrap;gap:6px;margin-left:25px}
+.ls a{font-size:13px;color:var(--ink);text-decoration:none;border:1px solid var(--c);border-radius:6px;padding:2px 9px}
+.ls a:hover{background:var(--c);color:var(--bg)}
+.tg{font-size:12px;color:var(--c);font-weight:600;margin-left:25px}
+.ft{margin-top:26px;font-size:13px;color:var(--mut)}
+@media (prefers-reduced-motion:reduce){.pt i{transition:none}}
+</style></head><body><div class="w">
+<h1>Peta belajar modeler</h1>
+<p class="sub">Dari Python sampai System Dynamics, SimPy, dan Agent-Based Modeling. Buka setiap fase untuk melihat cabang materinya, klik tautan untuk belajar, centang yang sudah selesai.</p>
+<div class="bar"><div class="pg"><span id="pc">0/0</span><div class="pt"><i id="pb"></i></div></div>
+<div class="fs" id="fs"></div>
+<div class="fs"><button id="ex">Buka semua</button><button id="co">Tutup semua</button></div></div>
+<ol class="ph" id="ph"></ol>
+<p class="ft">Tautan mengarah ke dokumentasi resmi dan materi gratis. Harga kursus berbayar (mis. Udemy) berubah mengikuti promo, jadi cek dulu sebelum membeli. Centang tersimpan di browser ini saja.</p>
+</div>
+<script>
+const T={py:"Python",sd:"System Dynamics",base:"Fondasi",simpy:"SimPy & Markov",gt:"Game theory",abm:"ABM"};
+const D=[
+{t:"Python dasar",d:"Jalan bareng fase 2",p:"Proyek: simulasi lempar dadu 10.000 kali dan plot hasilnya.",x:[
+["Sintaks, tipe data, string","Variabel, operator, casting, f-string.","py",[["Tutorial Python resmi","https://docs.python.org/3/tutorial/"],["Kaggle Learn Python","https://www.kaggle.com/learn/python"]]],
+["Alur kontrol & fungsi","if, for, while, fungsi, lambda, list comprehension.","py",[["Automate the Boring Stuff","https://automatetheboringstuff.com/"],["CS50P Harvard","https://cs50.harvard.edu/python/"]]],
+["Struktur data","list, tuple, dict, set. Dipakai terus di model.","py",[["Real Python: data structures","https://realpython.com/python-data-structures/"]]],
+["OOP (wajib untuk Mesa)","class, __init__, inheritance. Agen di ABM adalah class.","abm",[["Real Python: OOP","https://realpython.com/python3-object-oriented-programming/"]]],
+["Generator & iterator (wajib untuk SimPy)","Proses SimPy ditulis sebagai generator dengan yield.","simpy",[["Real Python: generators","https://realpython.com/introduction-to-python-generators/"]]],
+["NumPy, Pandas, Matplotlib","Hitung, olah hasil simulasi, dan gambar grafik.","py",[["NumPy: absolute beginners","https://numpy.org/doc/stable/user/absolute_beginners.html"],["Pandas: intro tutorials","https://pandas.pydata.org/docs/getting_started/intro_tutorials/"],["Matplotlib tutorials","https://matplotlib.org/stable/tutorials/"]]],
+["Lingkungan kerja","venv, pip, uv, Jupyter, VS Code.","py",[["venv (resmi)","https://docs.python.org/3/tutorial/venv.html"],["uv","https://docs.astral.sh/uv/"],["JupyterLab","https://jupyterlab.readthedocs.io/"]]]]},
+{t:"System Dynamics",d:"Sampai kursus SD selesai",p:"Proyek: model stok-aliran kecil (populasi, persediaan, atau adopsi produk).",x:[
+["Berpikir sistem & causal loop","Loop penguat dan penyeimbang, delay, pola perilaku.","sd",[["MIT OCW 15.871","https://ocw.mit.edu/courses/15-871-introduction-to-system-dynamics-fall-2013/"],["Donella Meadows Project","https://donellameadows.org/"]]],
+["Stock & flow","Stok, aliran, variabel bantu, persamaan diferensial sederhana.","sd",[["System Dynamics Society","https://systemdynamics.org/"],["Insight Maker (gratis)","https://insightmaker.com/"]]],
+["Perangkat lunak SD","Bangun model visual dan jalankan simulasi.","sd",[["Vensim PLE","https://vensim.com/vensim-personal-learning-edition/"],["Stella","https://www.iseesystems.com/"]]],
+["SD di Python","Jalankan model Vensim/Stella dari kode, lalu analisis massal.","sd",[["PySD","https://pysd.readthedocs.io/"],["BPTK-Py","https://bptk.transentis.com/"]]]]},
+{t:"Probabilitas, statistik, aljabar linear",d:"2-3 minggu",p:"Proyek: estimasi pi dan risiko dengan Monte Carlo di Python.",x:[
+["Probabilitas & peluang bersyarat","Aturan Bayes, peubah acak, ekspektasi, variansi.","base",[["Khan Academy","https://www.khanacademy.org/math/statistics-probability"],["Harvard Stat 110","https://projects.iq.harvard.edu/stat110"],["Seeing Theory","https://seeing-theory.brown.edu/"]]],
+["Distribusi penting","Binomial, Poisson, eksponensial, normal. Eksponensial dan Poisson adalah bahan antrean.","base",[["MIT OCW 6.041","https://ocw.mit.edu/courses/6-041sc-probabilistic-systems-analysis-and-applied-probability-fall-2013/"]]],
+["Monte Carlo & replikasi","Banyak percobaan acak, interval kepercayaan, seed.","base",[["NumPy random","https://numpy.org/doc/stable/reference/random/index.html"],["SciPy stats","https://docs.scipy.org/doc/scipy/tutorial/stats.html"]]],
+["Aljabar linear dasar","Vektor, matriks, perkalian matriks (untuk matriks transisi).","base",[["3Blue1Brown","https://www.3blue1brown.com/topics/linear-algebra"]]]]},
+{t:"Markov Chains & teori antrean",d:"3-4 minggu",p:"Proyek: model Markov status pelanggan (aktif, pasif, pergi) dan hitung distribusi jangka panjang.",x:[
+["Rantai Markov diskret","State, matriks transisi, simulasi langkah demi langkah.","simpy",[["Visual explanation (Setosa)","https://setosa.io/ev/markov-chains/"],["Grinstead & Snell (buku gratis)","https://math.dartmouth.edu/~prob/prob/prob.pdf"]]],
+["Distribusi stasioner & rantai absorbing","Kondisi jangka panjang, waktu sampai absorbing.","simpy",[["QuantEcon lectures","https://quantecon.org/lectures/"]]],
+["Markov di Python","Matriks transisi dengan NumPy, simulasi lintasan.","simpy",[["NumPy linear algebra","https://numpy.org/doc/stable/reference/routines.linalg.html"]]],
+["Teori antrean","M/M/1, M/M/c, utilisasi, Little’s Law. Dasar menafsirkan hasil SimPy.","simpy",[["Queueing theory (Wikipedia)","https://en.wikipedia.org/wiki/Queueing_theory"],["Little’s law (Wikipedia)","https://en.wikipedia.org/wiki/Little%27s_law"]]]]},
+{t:"SimPy (simulasi kejadian diskret)",d:"Bagian dari 3-4 minggu",p:"Proyek: simulasi antrean bank/klinik, bandingkan 1 vs 3 loket.",x:[
+["Environment, process, timeout","Inti SimPy: jam simulasi dan proses berbasis generator.","simpy",[["SimPy in 10 minutes","https://simpy.readthedocs.io/en/latest/simpy_intro/index.html"],["Learn SimPy (Udemy)","https://www.udemy.com/courses/search/?q=simpy"]]],
+["Resource, Container, Store","Modelkan loket, tangki, dan antrean barang.","simpy",[["Topical guides","https://simpy.readthedocs.io/en/latest/topical_guides/index.html"]]],
+["Event & interupsi","Menunggu beberapa kejadian, prioritas, preemption.","simpy",[["Dokumentasi SimPy","https://simpy.readthedocs.io/en/latest/"]]],
+["Pengumpulan data & analisis","Catat waktu tunggu, replikasi, periode warm-up, Pandas.","simpy",[["Monitoring (SimPy)","https://simpy.readthedocs.io/en/latest/topical_guides/monitoring.html"],["Pandas","https://pandas.pydata.org/docs/"]]]]},
+{t:"Game theory",d:"2-3 minggu",p:"Proyek: dilema harga dua penjual, cari keseimbangan Nash.",x:[
+["Game normal-form & Nash","Strategi dominan, keseimbangan Nash, dilema tahanan.","gt",[["Yale Game Theory (Polak)","https://oyc.yale.edu/economics/econ-159"],["Stanford Game Theory (Coursera)","https://www.coursera.org/learn/game-theory-1"]]],
+["Game berulang & evolusioner","Strategi tit-for-tat, populasi strategi. Jembatan ke ABM.","gt",[["Nashpy","https://nashpy.readthedocs.io/"]]]]},
+{t:"Agent-Based Modeling",d:"4-6 minggu",p:"Proyek akhir: ABM yang menggabungkan semua fase (agen mengambil keputusan, ada antrean, ada umpan balik).",x:[
+["Konsep ABM","Agen, lingkungan, aturan, perilaku muncul. Pelajari Schelling, Boids, Sugarscape.","abm",[["Complexity Explorer","https://www.complexityexplorer.org/"],["NetLogo Models Library","https://ccl.northwestern.edu/netlogo/models/"]]],
+["NetLogo","Prototipe cepat tanpa kode berat.","abm",[["NetLogo docs","https://ccl.northwestern.edu/netlogo/docs/"]]],
+["Mesa (Python)","Model, Agent, grid, scheduler, visualisasi.","abm",[["Mesa intro tutorial","https://mesa.readthedocs.io/latest/tutorials/intro_tutorial.html"],["Mesa docs","https://mesa.readthedocs.io/"]]],
+["Jaringan & ruang","Agen di graf sosial dan peta.","abm",[["NetworkX tutorial","https://networkx.org/documentation/stable/tutorial.html"]]],
+["Eksperimen batch","Jalankan ratusan skenario dan kumpulkan hasil.","abm",[["Mesa batch runner","https://mesa.readthedocs.io/"]]]]},
+{t:"Integrasi, validasi, portofolio",d:"Berjalan di tiap fase",p:"Proyek: satu repositori GitHub berisi model SD, SimPy, ABM, dan README yang menjelaskan asumsi.",x:[
+["Verifikasi & validasi","Cek kode, cek perilaku, bandingkan dengan data nyata.","sd",[["Protokol ODD","https://www.jasss.org/23/2/7.html"]]],
+["Analisis sensitivitas","Parameter mana yang paling berpengaruh.","base",[["SALib","https://salib.readthedocs.io/"]]],
+["Model hibrida","Gabung SD + ABM atau DES + ABM.","abm",[["AnyLogic PLE","https://www.anylogic.com/downloads/"]]],
+["Dokumentasi & portofolio","Git, README, notebook yang bisa dijalankan ulang.","py",[["GitHub Docs","https://docs.github.com/en/get-started"]]]]}];
+const ph=document.getElementById("ph"),fs=document.getElementById("fs");
+const sv=(k,v)=>{try{v?localStorage.setItem(k,1):localStorage.removeItem(k)}catch(e){}};
+const gt=k=>{try{return localStorage.getItem(k)}catch(e){return null}};
+ph.innerHTML=D.map((p,i)=>`<li><details class="p" ${i<2?"open":""}><summary><span class="n">${i+1}</span><h2 class="pt2">${p.t}</h2><p class="meta">${p.d}</p></summary><p class="proj">${p.p}</p><ul class="t">${p.x.map((x,j)=>{const k=`pm-${i}-${j}`;return`<li class="tp ${gt(k)?"done":""}" data-g="${x[2]}" style="--c:var(--${x[2]})"><label><input type="checkbox" data-k="${k}" ${gt(k)?"checked":""}><span class="tt">${x[0]}</span></label><p>${x[1]}</p><div class="ls">${x[3].map(l=>`<a href="${l[1]}" target="_blank" rel="noopener noreferrer">${l[0]}</a>`).join("")}</div></li>`}).join("")}</ul></details></li>`).join("");
+fs.innerHTML=`<button aria-pressed="true" data-f="all">Semua</button>`+Object.keys(T).map(k=>`<button aria-pressed="false" data-f="${k}" style="--c:var(--${k})">${T[k]}</button>`).join("");
+function upd(){const a=[...ph.querySelectorAll("input")],d=a.filter(c=>c.checked).length;document.getElementById("pc").textContent=d+"/"+a.length+" topik";document.getElementById("pb").style.width=(100*d/a.length)+"%"}
+ph.addEventListener("change",e=>{const c=e.target;sv(c.dataset.k,c.checked);c.closest("li").classList.toggle("done",c.checked);upd()});
+fs.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;fs.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));const f=b.dataset.f;
+ph.querySelectorAll("li.tp").forEach(l=>l.hidden=f!=="all"&&l.dataset.g!==f);
+ph.querySelectorAll("details").forEach(d=>{const s=[...d.querySelectorAll("li.tp")].some(l=>!l.hidden);d.parentElement.hidden=!s;if(f!=="all"&&s)d.open=true})});
+document.getElementById("ex").onclick=()=>ph.querySelectorAll("details").forEach(d=>d.open=true);
+document.getElementById("co").onclick=()=>ph.querySelectorAll("details").forEach(d=>d.open=false);
+upd();
+</script></body></html>
